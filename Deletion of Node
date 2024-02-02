@@ -1,0 +1,26 @@
+class Solution
+{
+    public:
+        // Function to calculate the decimal value of a linked list
+        long long unsigned int decimalValue(struct Node *head)
+        {
+            // Initialize result variable
+            long long unsigned int res = 0;
+            
+            // Traverse the linked list
+            while (head != NULL)
+            {
+                // Calculate the decimal value by multiplying the result by 2 and adding current node's data
+                // Also, use modular division to ensure the result doesn't exceed the maximum value
+                res = ((res * 2) % MOD + head->data) % MOD;
+                
+                // Move to the next node
+                head = head->next;
+            }
+            
+            // Return the final decimal value
+            return res;
+        }
+};
+
+

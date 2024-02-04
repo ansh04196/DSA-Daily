@@ -1,0 +1,38 @@
+class Solution
+{
+    public:
+    Node *sortedInsert(struct Node *head, int data)
+    {
+        struct Node* current = head;
+        struct Node* new_Node = new Node(data);
+        
+        if (current == NULL)
+        {
+          new_Node->next = new_Node;
+          return new_Node;
+        }
+        
+        // Case 2 of the above algo
+        else if (current->data >= new_Node->data)
+        {
+           int tmp = current->data; 
+           current->data = new_Node->data; 
+           new_Node->data = tmp; 
+           new_Node->next = (head)->next; 
+          (head)->next = new_Node; 
+        }
+        
+        else
+        {
+            /* Locate the Node before the point of insertion */
+            while (current->next!= head &&
+                current->next->data < new_Node->data)
+            current = current->next;
+            
+            new_Node->next = current->next;
+            current->next = new_Node;
+            return head;
+        }
+    }
+
+};

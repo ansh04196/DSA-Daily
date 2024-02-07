@@ -1,0 +1,36 @@
+class Solution{
+  public:
+    /*You are required to complete this method*/
+    bool check(Node *root)
+    {
+       int max_dist = maxDist(root);
+        int min_dist = minDist(root);
+
+        if (max_dist == min_dist)
+            return true;
+        return false;
+    }
+
+    int maxDist(Node* curr) {
+        if (curr == nullptr)
+            return 0;
+
+        int left_dist = maxDist(curr->left);
+        int right_dist = maxDist(curr->right);
+
+        return 1 + max(left_dist, right_dist);
+    }
+
+    int minDist(Node* curr) {
+        if (curr == nullptr)
+            return INT_MAX;
+
+        if (curr->left == nullptr && curr->right == nullptr)
+            return 1;
+
+        int left_dist = minDist(curr->left);
+        int right_dist = minDist(curr->right);
+
+        return 1 + min(left_dist, right_dist);
+    }
+};

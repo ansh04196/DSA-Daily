@@ -1,0 +1,45 @@
+class Solution{
+    public:
+    //Function to check whether all nodes of a tree have the value 
+    //equal to the sum of their child nodes.
+    int isSumProperty(Node *root)
+    {
+    // Add your code here
+        queue<Node*>q;
+        q.push(root);
+        q.push(NULL);
+        
+        
+        while(!q.empty())
+        {
+            Node* curr = q.front();
+            q.pop();
+            
+            if(curr == NULL)
+            {
+                if(!q.empty())
+                q.push(NULL);
+                continue;
+            }
+            
+            int sum = 0;
+
+            if(curr->left)
+            {
+                q.push(curr->left);
+                sum+=curr->left->data;
+            }
+            
+            if(curr->right)
+            {
+                q.push(curr->right);
+                sum += curr->right->data;
+            }
+            
+            if(sum != curr->data && sum != 0)
+                return 0;
+        }
+            
+        return 1;
+    }
+};

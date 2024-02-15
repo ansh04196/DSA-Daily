@@ -1,0 +1,57 @@
+class Solution {
+    void dfs(int node, vector<int> adj[],
+             vector<int>& visited)
+    {
+
+        for (int i = 0; i < adj[node].size(); i++) {
+            int node1 = adj[node][i];
+            if (visited[node1] == 0) {
+                visited[node1] = 1;
+                dfs(node1, adj, visited);
+            }
+        }
+    }
+
+public:
+    int isPossible(vector<vector<int> > paths)
+    {
+        // Code here
+        int v = paths.size();
+        vector<int> adj[v];
+
+        for (int i = 0; i < v; i++) {
+            for (int j = 0; j < v; j++) {
+                if (paths[i][j] == 1)
+                    adj[i].push_back(j);
+            }
+        }
+
+        vector<int> visited(v, 0);
+        visited[0] = 1;
+        dfs(0, adj, visited);
+
+        for (int i = 0; i < v; i++) {
+            if (visited[i] == 1)
+                continue;
+
+            else {
+                if (adj[i].size() == 0)
+                    continue;
+                else
+                    return 0;
+            }
+        }
+
+        int count = 0;
+        for (int i = 0; i < v; i++) {
+            int degree = adj[i].size();
+            if (degree % 2 == 0)
+                count++;
+        }
+
+        if (count == v)
+            return 1;
+        else
+            return 0;
+    }
+};

@@ -1,0 +1,33 @@
+class Solution{
+    public:
+	//Function to generate all possible strings from a given string.
+        vector<string> AllPossibleStrings(string s){
+	    //creating a vector to store the result.
+            vector<string>res;
+            //calculating the size of the string.
+	    int n = s.size();
+	    //iterating over all possible subsets of characters in the string.
+	    //using a bitmasking approach.
+	    for(int i = 0; i < (1 << n); i++){
+	        //creating a temporary string to store each subset.
+		string temp ="";
+		//iterating over each character in the string.
+		for(int j = 0; j < n; j++){
+		    //checking if the jth character should be included in the subset or not
+		    //by checking if the jth bit is set in the bitmask i.
+		    if(i & (1 << j))
+		        //if yes, adding the character to the temporary string.
+			temp += s[j];
+		}
+		//checking if the temporary string is not empty
+		//to avoid adding empty strings to the result.
+		if(temp.size())
+		//adding the temporary string to the result vector.
+		res.push_back(temp);
+	    }
+	    //sorting the result vector in lexicographical order.
+	    sort(res.begin(), res.end());
+	    //returning the result vector.
+	    return res;
+        }
+};

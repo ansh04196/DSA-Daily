@@ -1,0 +1,12 @@
+int* game_with_number(int arr[], int n)
+{
+    //Iterating through the array till second last element.
+    for(int d=0;d < n-1;d++)
+    {
+        //Performing bitwise OR operation on adjacent elements.
+        arr[d] = arr[d] | arr[d+1];
+    }
+    
+    //Returning the updated array.
+    return arr;
+}

@@ -1,0 +1,32 @@
+class Solution{
+    public:
+    //Function to check if the given string is divisible by 8.
+    int DivisibleByEight(string s){
+        int ans;
+        //Checking if the length of the string is greater than 3.
+        if(s.length()>3)
+	    {
+	        //Parsing the last 3 characters of the string as an integer.
+	        int number=stoi(s.substr(s.length()-3));
+	        //Checking if the number is not divisible by 8.
+	        if(number%8)
+                ans=-1;
+            //If the number is divisible by 8, setting ans to 1.
+            else
+                ans=1; 
+	    }
+	    else
+	    {
+	        //Parsing the entire string as an integer.
+	        int number=stoi(s);
+	        //Checking if the number is not divisible by 8.
+            if(number%8)
+                ans=-1;
+	        //If the number is divisible by 8, setting ans to 1.
+	        else
+	            ans=1;
+	    }
+        //Returning the value of ans.
+        return ans;
+    }
+};

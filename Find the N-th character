@@ -1,0 +1,54 @@
+class Solution{
+  public:
+    //Function to find the nth character in the given pattern
+    char nthCharacter(string s, int r, int n) {
+        //Incrementing n by 1 as the pattern starts from index 1
+        n++;
+        //String to store the final pattern
+        string f;
+        //Variable to keep track of iteration and calculate pattern length
+        long int it = 0, p, i, j, len = 0;
+        
+        //Loop to calculate the pattern length until it is greater than n
+        while (len < n) {
+            it++;
+            //Calculating pattern length using exponentiation
+            len = it * pow(2, r);
+        }
+        
+        //Calculating the power of 2 for the pattern length
+        p = pow(2, r);
+        
+        //Reducing n by 1 to get the correct index in the pattern
+        n--;
+        //Taking modulo with pattern length to handle cyclical pattern
+        n = n % p;
+        
+        //If it is the first iteration, increment it by 1
+        if (it == 0)
+            it++;
+        
+        //Appending the character at the corresponding index in the pattern
+        f += s[it - 1];
+        
+        //Loop to generate the pattern by doubling its length r times
+        for (i = 0; i < r; i++) {
+            //Clearing the previous pattern
+            s.clear();
+            
+            //Generating the new pattern by doubling each character
+            for (j = 0; j < f.length(); j++) {
+                if (f[j] == '1')
+                    s += "10";
+                else
+                    s += "01";
+            }
+            
+            //Updating the final pattern
+            f.clear();
+            f += s;
+        }
+        //Returning the nth character in the final pattern
+        return f[n];
+    }
+};

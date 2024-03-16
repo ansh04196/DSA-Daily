@@ -1,0 +1,22 @@
+class Solution{
+  public:
+    // Function to count pairs in two linked lists whose sum is equal to x
+    int countPairs(struct Node* head1, struct Node* head2, int x) {
+        int count = 0;
+        unordered_set<int> us; // Using unordered set to store numbers from list1
+    
+        // Adding all numbers in list1 to the set
+        while (head1 != NULL) {
+            us.insert(head1->data);
+            head1 = head1->next;
+        }
+    
+        // Checking whether there is a corresponding number in the set for each number in list2
+        while (head2 != NULL) {
+            if (us.find(x - head2->data) != us.end())
+                count++; // Incrementing count if pair is found
+            head2 = head2->next;
+        }
+        return count;
+    }
+};

@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    long long reversedBits(long long x) {
+        
+        if(x==0)
+            return 0;
+        string s = bitset<32>(x).to_string(); 
+        s = s.substr(s.find('1')); // Remove leading zeros
+        
+        long long y = 32 - s.length();
+        
+        s = string(y, '0') + s; // Adding leading zeroes to fill 32 bits
+        
+        // Reverse the binary
+        reverse(s.begin(), s.end());
+        
+        // Change binary to its Integer Form
+        long long ans = bitset<32>(s).to_ulong(); 
+        return ans;
+    }
+};

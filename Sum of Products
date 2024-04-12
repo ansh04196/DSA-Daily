@@ -1,0 +1,18 @@
+class Solution {
+  public:
+    long long pairAndSum(int n, long long arr[]) {
+        long long ans = 0; // Initialize result
+
+        // Traverse over all bits
+        for (int i = 0; i < 32; i++) {
+            // Count number of elements with i'th bit set
+            long long k = 0; // Initialize the count
+            for (int j = 0; j < n; j++)
+                if ((arr[j] & (1 << i))) k++;
+
+            ans += (1 << i) * (k * (k - 1) / 2);
+        }
+
+        return ans;
+    }
+};

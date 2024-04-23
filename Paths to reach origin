@@ -1,0 +1,30 @@
+class Solution
+{
+public:
+    //Function to find the number of ways to reach from (0,0) to (x,y).
+    int ways(int x, int y)
+    {
+        int mod = 1e9+7;
+        int dp[501][501]; //2D array to store the number of ways.
+
+        //Initializing the boundaries of the array with 1.
+        for(int i=0;i<501;i++)
+        {
+            dp[0][i]=1;
+            dp[i][0]=1;
+        }
+        dp[0][0]=1;
+     
+        //Calculating the number of ways using dynamic programming.
+        for(long long i=1;i<501;i++)
+        {
+            for(long long j=1;j<501;j++)
+            {
+                dp[i][j]=(dp[i-1][j]+dp[i][j-1])%mod;
+            }
+        }
+    
+        //Returning the number of ways to reach (x,y).
+        return dp[x][y];
+    }
+};

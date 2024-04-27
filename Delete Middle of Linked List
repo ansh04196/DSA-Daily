@@ -1,0 +1,38 @@
+
+class Solution{
+    public:
+
+    struct Node *deleteMid(struct Node *head)
+    {
+        if (head == NULL) return NULL;
+        
+        if (head->next == NULL) {
+            delete head;
+            return NULL;
+        }
+        
+        struct Node *prev = NULL;
+        struct Node *slow_ptr = head;
+        struct Node *fast_ptr = head;
+        
+        
+        while (fast_ptr != NULL && fast_ptr->next != NULL) 
+        {
+            fast_ptr = fast_ptr->next->next;
+            // fast pointer moves 2 nodes ahead everytime loop is run 
+            
+            prev = slow_ptr;
+            // updating prev, prev holds previous value of slow pointer
+            
+            slow_ptr = slow_ptr->next;
+            // slow pointer moves 1 node ahead everytime loop is run
+        }
+        
+        // since slow pointer was moving at half speed, it points at
+        // mid node when fast pointer reaches the end
+        prev->next = slow_ptr->next; // bypassing mid node
+        delete slow_ptr;
+        
+        return head;
+    }   
+};

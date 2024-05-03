@@ -1,0 +1,25 @@
+class Solution
+{
+    public:
+     
+    void KdistanceUtil(struct Node *root,int k,vector<int> &nodes){
+        // Base Case
+        if (root==NULL)  return;
+         
+        if (k==0)
+            nodes.push_back(root->data);
+         
+        KdistanceUtil(root->left, k-1,nodes);
+        KdistanceUtil(root->right, k-1,nodes);
+    }
+    
+    
+    vector<int> Kdistance(struct Node *root, int k)
+    {
+        vector<int> nodes;
+        
+        KdistanceUtil(root,k,nodes);
+         
+        return nodes;
+    }
+};

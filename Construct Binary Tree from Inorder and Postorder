@@ -1,0 +1,47 @@
+class Solution
+{
+    public:
+
+    //Function to return a tree created from postorder and inoreder traversals.
+    Node* buildUtil(int in[], int post[], int inStrt, int inEnd,
+                    int* pIndex, unordered_map<int, int>& mp)
+    {
+        // Base case
+        if (inStrt > inEnd)
+            return NULL;
+    
+        /* Pick current node from Postorder traversal
+        using postIndex and decrement postIndex */
+        int curr = post[*pIndex];
+        Node* node = new Node(curr);
+        (*pIndex)--;
+    
+        /* If this node has no children then return */
+        if (inStrt == inEnd)
+            return node;
+    
+        /* Else find the index of this node in Inorder
+        traversal */
+        int iIndex = mp[curr];
+    
+        /* Using index in Inorder traversal, construct
+        left and right subtrees */
+        node->right = buildUtil(in, post, iIndex + 1, inEnd,
+                                pIndex, mp);
+        node->left = buildUtil(in, post, inStrt, iIndex - 1,
+                               pIndex, mp);
+    
+        return node;
+    }
+    
+    Node* buildTree(int in[], int post[], int n)
+    {
+        // Your code here
+        unordered_map<int, int> mp;
+        for (int i = 0; i < n; i++)
+            mp[in[i]] = i;
+    
+        int index = n - 1; // Index in postorder
+        return buildUtil(in, post, 0, n - 1, &index, mp);
+    }
+};

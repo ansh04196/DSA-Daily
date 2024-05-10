@@ -1,0 +1,23 @@
+class Solution {
+  public:
+ 
+    vector<int> jugglerSequence(int n) {
+      
+        vector<int> res;
+        res.emplace_back(n);
+ 
+        while (n > 1) {
+          
+            if (n % 2)
+                n = (sqrt(n) * n);
+            
+            else
+                n = sqrt(n);
+ 
+            res.emplace_back(n);
+        }
+
+        
+        return res;
+    }
+};

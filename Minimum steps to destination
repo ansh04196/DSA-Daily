@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int minSteps(int D)
+    {
+
+        int ans = ceil(sqrt(2 * abs(D) + 0.25) - 0.5);
+
+        if (D % 2 == 0) {
+            if (ans % 4 == 1)
+                ans += 2;
+            if (ans % 4 == 2)
+                ans++;
+        }
+        else {
+            if (ans % 4 == 3)
+                ans += 2;
+            if (ans % 4 == 0)
+                ans++;
+        }
+
+        return ans;
+    }
+};

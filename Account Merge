@@ -1,0 +1,75 @@
+class Solution {
+public:
+    void mergeHelper(vector<vector<string> >& accounts,
+                     unordered_map<string, vector<int> >&
+                         emailToAccounts,
+                     vector<bool>& visited, int index,
+                     set<string>& mergedAccount)
+    {
+        if (visited[index])
+            return;
+        visited[index] = true;
+
+        for (int i = 0; i < accounts[index].size(); ++i) {
+            mergedAccount.insert(accounts[index][i]);
+        }
+
+        for (int i = 1; i < accounts[index].size(); ++i) {
+            for (int j = 0;
+                 j < emailToAccounts[accounts[index][i]]
+                         .size();
+                 ++j) {
+                int nextIndex
+                    = emailToAccounts[accounts[index][i]]
+                                     [j];
+                mergeHelper(accounts, emailToAccounts,
+                            visited, nextIndex,
+                            mergedAccount);
+            }
+        }
+    }
+
+    vector<vector<string> >
+    accountsMerge(vector<vector<string> >& accounts)
+    {
+        // code here
+
+        unordered_map<string, vector<int> > emailToAccounts;
+        vector<bool> visited(accounts.size(), false);
+
+        // Map each email to the indices of accounts it
+        // appears in
+        for (int i = 0; i < accounts.size(); ++i) {
+            for (int j = 1; j < accounts[i].size(); ++j) {
+                emailToAccounts[accounts[i][j]].push_back(
+                    i);
+            }
+        }
+
+        vector<set<string> > mergedAccounts;
+
+        // Merge accounts
+        for (int i = 0; i < accounts.size(); ++i) {
+            if (!visited[i]) {
+                set<string> mergedAccount;
+                mergeHelper(accounts, emailToAccounts,
+                            visited, i, mergedAccount);
+                mergedAccounts.push_back(mergedAccount);
+            }
+        }
+
+        vector<vector<string> > ans;
+
+        for (auto& it : mergedAccounts) {
+
+            vector<string> v1;
+            for (auto& it1 : it) {
+                v1.push_back(it1);
+            }
+
+            ans.push_back(v1);
+        }
+
+        return ans;
+    }
+};

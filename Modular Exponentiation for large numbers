@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    // Function to calculate power modulo.
+	long long int PowMod(long long int x, long long int n, long long int M)
+	{
+		long long int result = 1;
+		
+		// Loop until n is greater than 0.
+		while(n > 0)
+		{
+		    // If n is odd, multiply result with x.
+		    if(n % 2 == 1)
+		        result = ((result % M) * (x % M)) % M;
+		    
+		    // Square x and divide n by 2.
+		    x = (x * x) % M;
+		    n = n / 2;
+		}
+		return result;
+	}
+};

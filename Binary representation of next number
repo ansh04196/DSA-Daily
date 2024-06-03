@@ -1,0 +1,24 @@
+class Solution {
+  public:
+    string binaryNextNumber(string s) {
+        // code here.
+        int n=s.size();
+        int c=1;
+        int i=0;
+        while(i<n and s[i]=='0')
+            s.erase(s.begin()+i);
+
+        for(int i=n-1; i >= 0; i--){
+            if(s[i]=='0'){
+                s[i]='1';
+                c = 0;
+                break;
+            }
+            else
+                s[i]='0';
+        }
+        if(c)
+            s='1'+s;
+        return s;
+    }
+};

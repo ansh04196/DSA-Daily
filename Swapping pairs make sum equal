@@ -1,0 +1,20 @@
+class Solution {
+  public:
+    int findSwapValues(int a[], int n, int b[], int m) {
+        // Your code goes here
+        unordered_map<int,int> mapB;
+        int sumA = accumulate(a, a+n, 0), sumB = 0;
+
+        for(int j=0; j<m; ++j) {
+            mapB[b[j]*2] = 1;
+            sumB = sumB+b[j];
+        }
+
+        for(int i=0; i<n; ++i) {
+            int temp = sumB-sumA+(2*a[i]);
+            if(mapB[temp] == 1)
+                return 1;
+        }
+        return -1;
+    }
+};

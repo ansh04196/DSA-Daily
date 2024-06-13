@@ -1,0 +1,12 @@
+class Solution {
+  public:
+    string armstrongNumber(int& n){
+        // code here
+        int num = n;
+        int a = n%10;
+        n/=10;
+        int b = n%10;
+        n/=10;
+        return (num == n*n*n+b*b*b+a*a*a) ? "Yes" : "No";
+    }
+};

@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int FindCoverage(vector<vector<int>>& mat){
+        // Code here
+        int cnt = 0;
+        int m = mat.size(), n = mat[0].size();
+        for(int i=0; i<m; i++) {
+            for(int j=0; j<n; j++) {
+                if(mat[i][j] == 0) {
+                    if(j < n-1 and mat[i][j+1]) 
+                        ++cnt;
+                    if(j > 0 and mat[i][j-1]) 
+                        ++cnt;
+                    if(i < m-1 and mat[i+1][j]) 
+                        ++cnt;
+                    if(i > 0 and mat[i-1][j]) 
+                        ++cnt;
+                }
+            }
+        }
+        return cnt;
+    }
+};

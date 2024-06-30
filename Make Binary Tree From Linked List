@@ -1,0 +1,19 @@
+TreeNode* fn(vector<int>&v,int ind) {
+    if(ind >= v.size()) 
+        return NULL;
+    TreeNode* cur = new TreeNode(v[ind])  ; 
+    cur->left = fn(v, 2*ind+1); 
+    cur->right = fn(v, 2*ind+2); 
+    return cur; 
+}
+
+void convert(Node *head, TreeNode *&root) {
+    // Your code here
+    vector<int>v; 
+    while(head) {
+        v.push_back(head->data); 
+        head=head->next; 
+    }
+    root = fn(v,0) ;
+    return;
+}

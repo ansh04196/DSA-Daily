@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    Node* removeAllDuplicates(struct Node* head) {
+        // code here
+        map<int,int>mp;
+        while(head){
+            mp[head->data]++;
+            head=head->next;
+        }
+        Node* f = new Node(0);
+        f->next = head;
+        Node* head1=f;
+        for(auto& it : mp){
+            if(it.second==1){
+                head1->next = new Node(it.first);
+                head1=head1->next;
+            }
+        }
+        return f->next;
+    }
+};

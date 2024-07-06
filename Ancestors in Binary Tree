@@ -1,0 +1,42 @@
+class Solution{
+  public:
+    // Function should return all the ancestor of the target node
+    vector<int> Ancestors(struct Node *root, int target)
+    {
+         // Code here
+        stack<Node*> st;
+        while (root || !st.empty()) {
+            while (root && root->data != target) {
+                st.push(root);
+                root = root->left;
+            }
+            
+            if (root && root->data == target)
+                break;
+            
+            if (!st.empty() && st.top()->right == NULL) {
+                root = st.top();
+                st.pop();
+                
+                while (!st.empty() && st.top()->right == root) {
+                    root = st.top();
+                    st.pop();
+                }
+            }
+            
+            root = (!st.empty()) ? st.top()->right : NULL;
+        }
+        
+        vector<int>ans;
+        
+        if (!st.empty()) {
+            while (!st.empty()) {
+                ans.push_back(st.top()->data);
+                st.pop();
+            }
+        }
+        
+        return ans;
+         
+    }
+};

@@ -1,0 +1,23 @@
+class Solution {
+  public:
+    // Function to find the maximum length of alternating subsequence
+    int alternatingMaxLength(vector<int>& arr) {
+        // If the size of the nums array is less than 2, return the size itself
+        if (arr.size() < 2)
+            return arr.size();
+        int up = 1, down = 1;
+        // Iterate through the nums array starting from the second element
+        for (int i = 1; i < arr.size(); i++) {
+            // If the current number is greater than the previous number, increase the
+            // "up" count
+            if (arr[i] > arr[i - 1])
+                up = down + 1;
+            // If the current number is less than the previous number, increase the
+            // "down" count
+            else if (arr[i] < arr[i - 1])
+                down = up + 1;
+        }
+        // Return the maximum value between "up" and "down"
+        return max(up, down);
+    }
+};

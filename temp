@@ -1,0 +1,29 @@
+#define ll long long
+class Solution {
+    const ll mod = 1000000007;
+public:
+    long long int findMaxProduct(vector<int>& a) {
+        // Write your code here
+        ll n = a.size(), cntz = 0, cntn = 0;
+        ll mini = LLONG_MIN, chk = mini;
+        long long res = 1;
+        for(int i=0; i<n; i++) {
+            if(a[i] == 0) 
+                cntz++;
+            if(a[i]<0) {
+                cntn++;
+                mini = max(mini, (ll)a[i]);
+            }
+            if(a[i] != 0)
+                res =(res*a[i])%mod;
+        }
+        if(cntz == n) 
+            return res;
+      
+      
+        if(mini!=chk and cntn%2==1)
+            res /= mini;
+        
+        return res%mod ;
+    }
+};

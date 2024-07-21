@@ -1,0 +1,20 @@
+class Solution{
+    public:
+     pair<int, pair<int,int>> fn(Node* root, int &ans){
+        if(!root)
+            return {0, {INT_MIN, INT_MAX}};
+        auto left = fn(root->left,ans);
+        auto right = fn(root->right,ans);
+
+        if(left.second.first < root->data and root->data < right.second.second){
+                ans = max(ans, left.first + right.first+1);
+                return {left.first + right.first + 1,{max(root->data, right.second.first), min(root->data, left.second.second)}};
+        }
+        return {0, {INT_MAX,INT_MIN}};
+    }
+    int largestBst(Node *root) {
+        int ans=0;
+        fn(root,ans);
+        return ans;
+    }
+};

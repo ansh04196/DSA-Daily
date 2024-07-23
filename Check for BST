@@ -1,0 +1,16 @@
+class Solution {
+
+  public:
+        bool fn(Node* root, int l_range, int r_range) {
+            if(root==nullptr)
+                return true;
+            if(root->data>l_range and root->data<r_range)
+                return fn(root->left, l_range, root->data) and fn(root->right, root->data, r_range);
+            return false;
+        }
+    // Function to check whether a Binary Tree is BST or not.
+    bool isBST(Node* root) {
+        // Your code here+
+        return fn(root, 0, INT_MAX);
+    }
+};

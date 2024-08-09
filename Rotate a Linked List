@@ -1,0 +1,28 @@
+class Solution {
+  public:
+     Node* rotate(Node* head, int k) {
+        if (k == 0)
+            return head;
+
+        Node* walk = head;
+        Node* prev;
+
+          while (k-- && walk != NULL) {
+            prev = walk;
+            walk = walk->next;
+        }
+         if (!walk)
+            return head;
+
+         Node* newHead = walk;
+
+          prev->next = NULL;
+
+         while (walk->next)
+            walk = walk->next;
+
+         walk->next = head;
+
+         return newHead;
+    }
+};

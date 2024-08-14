@@ -1,0 +1,22 @@
+class Solution {
+  public:
+  
+      int addCarry(Node* head) {
+        if (head == nullptr)
+            return 1;
+         int res = head->data + addCarry(head->next);
+         head->data = res % 10;
+        return res / 10;
+    }
+
+
+    Node* addOne(Node* head) {
+          int carry = addCarry(head);
+         if (carry != 0) {
+            Node* newNode = new Node(carry);
+            newNode->next = head;
+            return newNode;
+        }
+        return head;
+    }
+};

@@ -1,0 +1,16 @@
+class Solution {
+  public:
+   
+    long long findNth(long long n) {
+        long long base10num = n;
+        long long base9num = 0;
+        long long pos = 1;
+        while (base10num > 0) {
+             base9num += pos * (base10num % 9);
+             base10num /= 9;
+             pos *= 10;
+        }
+
+        return base9num;
+    }
+};

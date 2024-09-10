@@ -1,0 +1,26 @@
+class Solution {
+  public:
+    // Function to return the minimum cost of connecting the ropes.
+    long long minCost(vector<long long> &arr) {
+        // Step 1: Use a min heap (priority queue) to keep track of the minimum elements
+        priority_queue<long long, vector<long long>, greater<long long>> pq(arr.begin(), arr.end());
+        
+        long long totalCost = 0;
+        
+        // Step 2: While more than one rope remains, connect the two smallest ropes
+        while (pq.size() > 1) {
+            // Extract the two smallest elements
+            long long first = pq.top();
+            pq.pop();
+            long long second = pq.top();
+            pq.pop();
+            
+            // Combine them and add the result back to the heap
+            long long cost = first + second;
+            totalCost += cost;
+            pq.push(cost);
+        }
+        
+        return totalCost;
+    }
+};

@@ -1,0 +1,20 @@
+class Solution { 
+  public: 
+    void f(Node* &root,Node* &prev,Node* &head){ 
+        if(root == NULL) return ;  
+         
+        f(root->left,prev,head);  
+        Node* newNode = new Node(root->data);  
+        if(head == NULL) head = newNode;  
+        newNode->left = prev;  
+        if(prev != NULL) prev->right = newNode;  
+        prev = newNode;  
+        f(root->right,prev,head);  
+    } 
+    Node* bToDLL(Node* root) { 
+       Node* prev = NULL;  
+       Node* head = NULL;  
+       f(root,prev,head);  
+       return head;  
+    } 
+};

@@ -1,0 +1,53 @@
+class Solution {
+  public:
+    /*Structure of the node of the linled list is as
+
+    struct Node {
+        int data;
+        struct Node* next;
+
+        Node(int x){
+            data = x;
+            next = NULL;
+        }
+    };
+    */
+    // your task is to complete this function
+    // function should return sum of last n nodes
+    int sumOfLastN_Nodes(struct Node* head, int n) {
+        // Code here
+         if (n <= 0)
+            return 0;
+     
+        int sum = 0, len = 0;
+        struct Node* temp = head;
+     
+        // calculate the length of the linked list
+        while (temp != NULL) {
+            len++;
+            temp = temp->next;
+        }
+     
+        // count of first (len - n) nodes
+        int c = len - n;
+        temp = head;
+     
+        // just traverse the 1st 'c' nodes
+        while (temp != NULL && c--)                    
+            // move to next node
+            temp = temp->next;
+     
+        // now traverse the last 'n' nodes and add them
+        while (temp != NULL) {
+     
+            // accumulate node's data to sum
+            sum += temp->data;
+     
+            // move to next node
+            temp = temp->next;
+        }
+     
+        // required sum
+        return sum;
+    }
+};

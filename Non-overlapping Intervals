@@ -1,0 +1,23 @@
+class Solution {
+  public:
+    int minRemoval(vector<vector<int>> &intervals) {
+        // code here
+            int count = 0;
+        sort(intervals.begin(),intervals.end());
+        int e = intervals[0][1];
+        int n = intervals.size();
+        for(int i=1;i<n;i++)
+        {
+            if(intervals[i][0] < e)
+            {
+                count++;
+                e = min(e, intervals[i][1]);
+            }
+            else
+            {
+                e = intervals[i][1];
+            }
+        }
+        return count;
+    }
+};

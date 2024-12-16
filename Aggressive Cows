@@ -1,0 +1,45 @@
+class Solution {
+  public:
+    // Function to check if it is possible to place k cows with minimum distance dist.
+    bool ispossible(int n, int k, vector<int> &stalls, int dist) {
+        int coord = stalls[0]; // first coordinate
+        int cnt = 1;           // count of cows placed
+
+        // Iterate over the stalls
+        for (int i = 1; i < n; i++) {
+            // If the distance between current stall and previous placed cow
+            // is greater than or equal to dist, place a cow at current stall.
+            if (stalls[i] - coord >= dist) {
+                cnt++;
+                coord = stalls[i];
+            }
+
+            // If we have placed k cows, return true.
+            if (cnt == k)
+                return true;
+        }
+        return false; // If not possible to place k cows
+    }
+
+    // Function to find the maximum minimum distance between cows.
+    int aggressiveCows(vector<int> &stalls, int k) {
+        int n = stalls.size(); // Compute the size of stalls
+
+        sort(stalls.begin(), stalls.end());   // Sorting the stalls
+        int low = 1;                          // Lower bound of minimum distance
+        int high = stalls[n - 1] - stalls[0]; // Higher bound of minimum distance
+
+        // Binary search to find the maximum minimum distance between cows.
+        while (low <= high) {
+            int mid = (low + high) / 2; // Mid-point distance
+            if (ispossible(n, k, stalls, mid)) {
+                low = mid + 1; // If it is possible to place k cows with distance mid,
+                               // update low.
+            } else {
+                high = mid - 1; // If it is not possible to place k cows with distance
+                                // mid, update high.
+            }
+        }
+        return high; // Return the maximum minimum distance found.
+    }
+};

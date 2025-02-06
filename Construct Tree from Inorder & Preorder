@@ -1,0 +1,45 @@
+// Class that contains the logic to build the binary tree
+/*
+Definition of the Node class
+class Node {
+public:
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int x) {
+        data = x;
+        left = NULL;
+        right = NULL;
+    }
+};
+*/
+Node *solve(map<int,int>&mpp,vector<int> &inorder,int instart , int inend , vector<int> &preorder , int prestart , int preend)
+{
+    
+    if(instart > inend) return NULL;
+    
+    Node *root = new Node(preorder[prestart]);
+    int numsleft = mpp[root->data]-instart;
+    root->left = solve(mpp,inorder , instart , mpp[root->data]-1 , preorder , prestart +1 ,prestart + numsleft);
+    root->right = solve(mpp,inorder , mpp[root->data]+1 , inend , preorder , prestart + numsleft + 1 , preend);
+    return root;
+}
+class Solution {
+  public:
+    // Function to build the tree from given inorder and preorder traversals
+    Node *buildTree(vector<int> &inorder, vector<int> &preorder) {
+        // code here
+        map<int,int>mpp;
+       
+        int instart =0;
+        int n = inorder.size()-1;
+         for(int i=0;i<=n;i++)
+         {
+             mpp[inorder[i]] = i;
+         }
+        return solve(mpp, inorder , instart , n , preorder , instart , n);
+    }
+};
+
+//GFG POTD solution for 06 February

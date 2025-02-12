@@ -1,0 +1,49 @@
+
+class Solution {
+  public:
+    // Function to perform Inorder traversal and store the
+    // elements in a vector
+    void inorderTraversal(Node* root, vector<int>& inorder) {
+        if (root == nullptr)
+            return;
+
+        inorderTraversal(root->left, inorder);
+
+        // Store the current node's value
+        inorder.push_back(root->data);
+
+        inorderTraversal(root->right, inorder);
+    }
+
+    // Function to find if there exists a pair with a
+    // given sum in the BST
+    bool findTarget(Node* root, int target) {
+
+        // Create an auxiliary array and store Inorder traversal
+        vector<int> inorder;
+        inorderTraversal(root, inorder);
+
+        // Use two-pointer technique to find the pair with given sum
+        int left = 0, right = inorder.size() - 1;
+
+        while (left < right) {
+            int currentSum = inorder[left] + inorder[right];
+
+            // If the pair is found, return true
+            if (currentSum == target)
+                return true;
+
+            // If the current sum is less than the target,
+            // move the left pointer
+            if (currentSum < target)
+                left++;
+
+            // If the current sum is greater than
+            // the target, move the right pointer
+            else
+                right--;
+        }
+
+        return false;
+    }
+};

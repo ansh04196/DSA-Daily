@@ -1,0 +1,48 @@
+/* A binary tree node has data, pointer to left child
+   and a pointer to right child
+struct Node
+{
+    int data;
+    Node* left;
+    Node* right;
+}; */
+
+class Solution {
+  public:
+   void inor(Node* root, vector<int> & temp)
+    {
+        if(!root) return;
+        inor(root->left, temp);
+        temp.push_back(root->data);
+        inor(root->right, temp);
+    }
+    //Function to serialize a tree and return a list containing nodes of tree.
+    vector<int> serialize(Node *root) 
+    {
+        vector<int> res;
+        //queue<Node*> que;
+        if(!root) return res;
+        inor(root, res);
+        return res;
+        //Your code here
+    }
+    Node* tree(vector<int>& a,int s,int e)
+    {
+        if(s>e) return nullptr;
+        int mid=(s+e)/2;
+        Node * root=new Node(a[mid]);
+        root->left=tree(a,s,mid-1);
+        root->right=tree(a,mid+1,e);
+        
+        return root;
+    }
+    //Function to deserialize a list and construct the tree.
+    Node * deSerialize(vector<int> &A)
+    {
+        int n = A.size();
+        return tree(A, 0, n-1);
+       //Your code here
+    }
+};
+
+//GFG POTD solution for 16 February

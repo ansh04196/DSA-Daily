@@ -1,0 +1,27 @@
+/*
+class Node {
+  public:
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int x) {
+        data = x;
+        left = NULL;
+        right = NULL;
+    }
+}; */
+
+class Solution {
+  public:
+    int findMaxFork(Node* root, int k) {
+        // code here
+        if(root==NULL)
+        return -1;
+        if(root->data>k)
+        return findMaxFork(root->left,k);
+        if(root->data<=k)
+        return max(root->data,findMaxFork(root->right,k));
+    }
+};
+//GFG POTD solution for 30 May
